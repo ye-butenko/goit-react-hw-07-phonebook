@@ -1,20 +1,18 @@
-import { nanoid } from 'nanoid';
 import { Formik } from 'formik';
 import { StyledBtn, StyledForm, StyledField } from './ContactForm.styled';
 import { useDispatch, useSelector } from 'react-redux';
-import { getContacts } from 'redux/selectors';
+import { selectContacts } from 'redux/selectors';
 import { addContact } from 'redux/contactsSlice';
 
 export const ContactForm = () => {
-  const contacts = useSelector(getContacts);
+  const contacts = useSelector(selectContacts);
 
   const dispatch = useDispatch();
 
   const handleSubmit = (values, { resetForm }) => {
     const newContact = {
-      id: 'id-' + nanoid(),
       name: values.name,
-      number: values.number,
+      phone: values.phone,
     };
 
     if (contacts.find(contact => contact.name === newContact.name)) {
@@ -27,9 +25,8 @@ export const ContactForm = () => {
   };
 
   const initialValues = {
-    id: '',
     name: '',
-    number: '',
+    phone: '',
   };
 
   return (
@@ -46,8 +43,8 @@ export const ContactForm = () => {
           />
         </>
         <>
-          <label htmlFor="number">Number:</label>
-          <StyledField type="tel" id="number" name="number" required />
+          <label htmlFor="phone">Number:</label>
+          <StyledField type="tel" id="phone" name="phone" required />
         </>
         <StyledBtn type="submit">Add contact</StyledBtn>
       </StyledForm>

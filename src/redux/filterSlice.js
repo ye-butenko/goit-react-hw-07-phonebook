@@ -5,11 +5,9 @@ const filtersSlice = createSlice({
   initialState: '',
 
   reducers: {
-    setFilter(state, action) {
-      return action.payload;
-    },
+    setContactFilter: (state, action) => action.payload,
   },
 });
 
-export const { setFilter } = filtersSlice.actions;
+export const { setContactFilter } = filtersSlice.actions;
 export const filtersReducer = filtersSlice.reducer;
